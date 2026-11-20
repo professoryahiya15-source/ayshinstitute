@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AYSH Online Institute | Learn Smarter. Achieve More.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #051937;
+      --navy-2: #0f2c52;
+      --orange: #ff7a00;
+      --cream: #faf6f0;
+      --ink: #0f172a;
+      --slate: #475569;
+      --muted: #64748b;
+      --line: #f1f5f9;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: 100%; max-width: 1152px; margin: 0 auto; padding: 0 64px; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      border-radius: 9999px; padding: 12px 24px;
+      font-weight: 700; font-size: 14px; border: 1px solid transparent;
+      cursor: pointer; transition: transform .15s ease, box-shadow .15s ease;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-orange { background: var(--orange); color: #020617; box-shadow: 0 10px 15px -3px rgba(249,115,22,.25), 0 4px 6px -4px rgba(249,115,22,.25); }
+    .btn-ghost { background: rgba(255,255,255,.05); border-color: #475569; color: #fff; font-weight: 600; }
+    .btn-navy { background: var(--navy); color: #fff; border-radius: 8px; padding: 12px 24px; font-weight: 600; box-shadow: 0 4px 6px -1px rgba(0,0,0,.1); }
+    .btn-wa { background: #22c55e; color: #fff; box-shadow: 0 10px 15px -3px rgba(20,83,45,.3), 0 4px 6px -4px rgba(20,83,45,.3); }
+    .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ---------- Dark hero + nav ---------- */
+    .dark-wrap {
+      background-color: #051937;
+      background-image:
+        linear-gradient(90deg, rgba(255,255,255,.05) 2.5%, rgba(255,255,255,0) 2.5%),
+        linear-gradient(180deg, rgba(255,255,255,.05) 2.5%, rgba(255,255,255,0) 2.5%);
+      background-size: 40px 40px;
+      border-bottom: 1px solid var(--navy-2);
+      padding: 24px 0 96px;
+      color: #fff;
+    }
+    .nav {
+      position: relative;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(219,226,234,.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.4);
+      border-radius: 9999px;
+      padding: 11px 25px;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+      gap: 16px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      width: 40px; height: 40px; border-radius: 9999px; background: #fff;
+      border: 1px solid #e2e8f0; display: grid; place-items: center;
+      font-weight: 800; font-size: 9px; color: var(--navy); flex-shrink: 0;
+    }
+    .brand-name { font-weight: 800; font-size: 14px; letter-spacing: .7px; color: var(--navy); line-height: 1.1; }
+    .brand-sub { font-weight: 600; font-size: 8px; letter-spacing: .8px; color: var(--muted); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-weight: 600; font-size: 12px; color: #334155; }
+    .nav-links a:hover { color: var(--orange); }
+    .nav .btn { padding: 10px 20px; font-size: 12px; }
+
+    .hero {
+      display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); gap: 32px;
+      align-items: center; margin-top: 72px;
+    }
+    .hero-copy { grid-column: 1 / span 6; display: flex; flex-direction: column; gap: 24px; }
+    .badge-pill {
+      display: inline-flex; align-items: center; gap: 8px; align-self: flex-start;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 9999px; padding: 7px 15px;
+      font-size: 12px; color: #e2e8f0; font-weight: 500;
+    }
+    .badge-pill .dot { color: var(--orange); font-weight: 800; }
+    .hero h1 { font-size: 52px; line-height: 52px; font-weight: 800; letter-spacing: -1.3px; }
+    .hero h1 .accent { color: var(--orange); display: block; }
+    .hero p.sub { font-size: 16px; line-height: 24px; color: #cbd5e1; max-width: 512px; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; padding-top: 8px; }
+    .proof { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-top: 16px; }
+    .proof span { font-size: 12px; font-weight: 500; color: #cbd5e1; display: inline-flex; align-items: center; gap: 6px; }
+    .proof svg { width: 16px; height: 16px; color: var(--orange); flex-shrink: 0; }
+
+    .hero-media { grid-column: 7 / span 6; position: relative; height: 384px; }
+    .hero-photo {
+      position: absolute; inset: 0 0 0 48px;
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.2);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+      background: linear-gradient(135deg, #fde68a 0%, #fcd34d 45%, #fbbf24 100%);
+      display: grid; place-items: center;
+      color: var(--navy); text-align: center; padding: 24px;
+    }
+    .hero-photo .ph-title { font-weight: 800; font-size: 26px; line-height: 1.15; color: #0b3d91; }
+    .hero-photo .ph-note { margin-top: 10px; font-size: 12px; color: #7c5a00; }
+    .float-badge {
+      position: absolute; left: 16px; top: 16px; z-index: 2;
+      background: rgba(255,255,255,.95); border: 1px solid #f1f5f9; border-radius: 12px;
+      padding: 9px 15px; box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+    }
+    .float-badge small { display: block; font-size: 10px; font-weight: 500; color: var(--muted); }
+    .float-badge strong { font-size: 12px; font-weight: 700; color: var(--ink); }
+
+    /* ---------- Shared section bits ---------- */
+    .eyebrow {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #ffedd5; color: #9a3412; border-radius: 9999px;
+      padding: 4px 12px; font-size: 11px; font-weight: 700;
+      letter-spacing: .55px; text-transform: uppercase;
+    }
+    .section-head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; max-width: 672px; margin: 0 auto; }
+    .section-head h2 { font-size: 36px; line-height: 40px; font-weight: 800; letter-spacing: -.9px; color: var(--navy); }
+    .section-head p { font-size: 14px; line-height: 20px; color: var(--slate); }
+
+    /* ---------- About ---------- */
+    .about { background: #f8fafc; padding: 80px 0; }
+    .about-inner { display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); gap: 48px; align-items: center; }
+    .about-media { grid-column: 1 / span 5; position: relative; min-height: 420px; }
+    .about-media .peach {
+      position: absolute; left: -12px; top: 40px; width: 112px; height: 112px;
+      background: #fed7aa; border-radius: 16px;
+    }
+    .about-media .photo {
+      position: absolute; left: 24px; top: 0; right: 0; bottom: 0; border-radius: 16px;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe); display: grid; place-items: center;
+      color: #1e3a8a; font-weight: 700; font-size: 14px; text-align: center; padding: 20px;
+    }
+    .about-copy { grid-column: 6 / span 7; display: flex; flex-direction: column; gap: 20px; }
+    .about-copy h2 { font-size: 36px; line-height: 40px; font-weight: 800; letter-spacing: -.9px; color: var(--navy); }
+    .about-copy p { font-size: 14px; line-height: 22.75px; color: var(--slate); }
+    .checks { display: flex; flex-direction: column; gap: 10px; padding-top: 8px; list-style: none; }
+    .checks li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #1e293b; }
+    .checks li::before {
+      content: ""; width: 20px; height: 20px; flex-shrink: 0; border-radius: 9999px;
+      border: 2px solid var(--orange);
+      background: radial-gradient(circle, var(--orange) 0 3px, transparent 3.5px);
+    }
+
+    /* ---------- Subjects ---------- */
+    .subjects { background: var(--cream); border-top: 1px solid #f0eae0; padding: 81px 0 80px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 24px; }
+    .subject-card {
+      background: #fff; border: 1px solid var(--line); border-radius: 16px;
+      padding: 25px; display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: 0 4px 20px -2px rgba(15,23,42,.05), 0 2px 6px -1px rgba(15,23,42,.03);
+      gap: 12px;
+    }
+    .subject-top { display: flex; align-items: center; justify-content: space-between; }
+    .icon-box { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-size: 18px; }
+    .arrow { color: #94a3b8; font-size: 14px; }
+    .subject-card h3 { font-size: 16px; font-weight: 700; color: var(--ink); padding-top: 8px; }
+    .subject-card p { font-size: 12px; line-height: 19.5px; color: var(--muted); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid #f8fafc; padding-top: 12px; }
+    .tag { background: #f1f5f9; color: var(--slate); font-size: 10px; font-weight: 600; border-radius: 9999px; padding: 4px 10px; }
+
+    /* ---------- Madrasa band ---------- */
+    .madrasa { background: var(--white); padding: 49px 0; }
+    .madrasa-card {
+      background: var(--navy); color: #fff; border-radius: 20px; padding: 41px;
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 32px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+    }
+    .madrasa-copy { max-width: 700px; display: flex; flex-direction: column; gap: 12px; }
+    .madrasa-copy h2 { font-size: 30px; font-weight: 800; letter-spacing: -.6px; }
+    .madrasa-copy p { font-size: 14px; color: #cbd5e1; }
+    .madrasa-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .madrasa-tags span { border: 1px solid rgba(255,255,255,.2); border-radius: 9999px; padding: 6px 13px; font-size: 12px; font-weight: 600; }
+    .madrasa-cta { display: flex; flex-direction: column; gap: 12px; }
+
+    /* ---------- Why us ---------- */
+    .why { background: var(--cream); padding: 80px 0; }
+    .why-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 24px; margin-top: 56px; }
+    .reason {
+      background: #fff; border-radius: 16px; padding: 29px; position: relative;
+      box-shadow: 0 4px 20px -2px rgba(15,23,42,.05), 0 2px 6px -1px rgba(15,23,42,.03);
+      border: 1px solid var(--line);
+    }
+    .reason .icon-box { background: #fff7ed; margin-bottom: 20px; }
+    .reason h3 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .reason p { font-size: 13px; line-height: 20px; color: var(--muted); }
+
+    /* ---------- Boards ---------- */
+    .boards { background: var(--white); padding: 80px 0; }
+    .board-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 24px; margin-top: 56px; }
+    .board {
+      background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 25px;
+      text-align: center; box-shadow: 0 4px 20px -2px rgba(15,23,42,.05);
+    }
+    .board .seal {
+      width: 56px; height: 56px; margin: 0 auto 16px; border-radius: 9999px;
+      background: #eef2ff; color: var(--navy); display: grid; place-items: center; font-weight: 800; font-size: 14px;
+    }
+    .board h3 { font-size: 16px; font-weight: 700; color: var(--ink); }
+    .board p { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+    .filters button {
+      font: inherit; font-size: 12px; font-weight: 600; color: var(--slate);
+      background: #f1f5f9; border: 1px solid transparent; border-radius: 9999px;
+      padding: 8px 16px; cursor: pointer;
+    }
+    .filters button.active, .filters button:hover { background: var(--navy); color: #fff; }
+
+    /* ---------- Reviews ---------- */
+    .reviews { background: #f8fafc; padding: 80px 0; }
+    .review-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 24px; margin-top: 56px; }
+    .review {
+      background: #fff; border-radius: 16px; padding: 29px; display: flex; flex-direction: column; gap: 16px;
+      box-shadow: 0 4px 20px -2px rgba(15,23,42,.05); border: 1px solid var(--line);
+    }
+    .review .quote-mark { font-size: 40px; line-height: 36px; color: var(--orange); font-weight: 800; }
+    .stars { color: #facc15; letter-spacing: 2px; font-size: 14px; }
+    .review blockquote { font-size: 14px; line-height: 22px; color: var(--slate); flex: 1; }
+    .reviewer { display: flex; align-items: center; gap: 12px; border-top: 1px solid #f1f5f9; padding-top: 16px; }
+    .avatar { width: 36px; height: 36px; border-radius: 9999px; background: #fde68a; display: grid; place-items: center; font-weight: 700; font-size: 13px; color: var(--navy); flex-shrink: 0; }
+    .reviewer strong { display: block; font-size: 13px; color: var(--ink); }
+    .reviewer small { font-size: 11px; color: var(--muted); }
+
+    /* ---------- Dark CTA + form ---------- */
+    .cta {
+      background-color: #051937;
+      background-image:
+        linear-gradient(90deg, rgba(255,255,255,.05) 2.5%, rgba(255,255,255,0) 2.5%),
+        linear-gradient(180deg, rgba(255,255,255,.05) 2.5%, rgba(255,255,255,0) 2.5%);
+      background-size: 40px 40px;
+      color: #fff; padding: 80px 0;
+    }
+    .cta-grid { display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); gap: 48px; align-items: center; }
+    .cta-copy { grid-column: 1 / span 6; display: flex; flex-direction: column; gap: 23px; }
+    .cta-copy .eyebrow { background: rgba(255,255,255,.1); color: #fdba74; align-self: flex-start; }
+    .cta-copy h2 { font-size: 44px; line-height: 40px; font-weight: 800; letter-spacing: -1.1px; }
+    .cta-copy p { font-size: 14px; line-height: 22.75px; color: #cbd5e1; max-width: 512px; }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 16px; padding-top: 12px; }
+    .feature-list li { display: flex; gap: 12px; align-items: flex-start; }
+    .feature-list .fi {
+      width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,.1);
+      display: grid; place-items: center; flex-shrink: 0; font-size: 14px;
+    }
+    .feature-list strong { display: block; font-size: 14px; color: #fff; }
+    .feature-list small { font-size: 12px; color: #cbd5e1; }
+
+    .form-card {
+      grid-column: 7 / span 6;
+      background: #fff; color: var(--ink);
+      border: 1px solid rgba(255,255,255,.2); border-radius: 16px; padding: 33px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+    }
+    .form-card h3 { font-size: 24px; line-height: 32px; font-weight: 800; color: var(--ink); }
+    .form-card .form-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    form { display: flex; flex-direction: column; gap: 16px; padding-top: 24px; }
+    .field { display: flex; flex-direction: column; gap: 4px; }
+    .field label { font-size: 12px; font-weight: 600; color: #334155; }
+    .field input {
+      font: inherit; font-size: 14px; color: var(--ink);
+      background: #fff; border: 1px solid #cbd5e1; border-radius: 8px;
+      padding: 12px 15px; outline: none; width: 100%;
+    }
+    .field input::placeholder { color: #94a3b8; }
+    .field input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,122,0,.15); }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .submit {
+      background: var(--navy); color: #fff; border: 0; border-radius: 8px;
+      padding: 14px 24px; font: inherit; font-size: 14px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      cursor: pointer; box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+      margin-top: 4px;
+    }
+    .submit:disabled { opacity: .6; cursor: not-allowed; }
+    .submit svg { width: 16px; height: 16px; }
+    .form-note { text-align: center; font-size: 11px; color: var(--muted); padding-top: 4px; }
+    .form-status { font-size: 13px; font-weight: 600; text-align: center; min-height: 18px; }
+    .form-status.ok { color: #15803d; }
+    .form-status.err { color: #b91c1c; }
+
+    /* ---------- Footer ---------- */
+    footer { background: var(--white); border-top: 1px solid #e2e8f0; padding: 49px 0 32px; }
+    .foot-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1.2fr; gap: 32px; }
+    .foot-grid h4 { font-size: 11px; letter-spacing: .6px; color: var(--muted); text-transform: uppercase; margin-bottom: 14px; }
+    .foot-grid ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .foot-grid a, .foot-grid li { font-size: 13px; color: var(--slate); }
+    .foot-grid a:hover { color: var(--orange); }
+    .foot-brand p { font-size: 13px; color: var(--muted); margin-top: 14px; max-width: 248px; }
+    .foot-bottom {
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      border-top: 1px solid #f1f5f9; margin-top: 40px; padding-top: 20px;
+      font-size: 12px; color: var(--muted);
+    }
+    .foot-bottom nav { display: flex; gap: 20px; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1100px) {
+      .container { padding: 0 32px; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 960px) {
+      .hero, .about-inner, .cta-grid { grid-template-columns: 1fr; }
+      .hero-copy, .hero-media, .about-media, .about-copy, .cta-copy, .form-card { grid-column: auto; }
+      .hero h1 { font-size: 42px; line-height: 46px; }
+      .hero-media { height: 340px; }
+      .hero-photo { inset: 0; }
+      .float-badge { left: 12px; top: 12px; }
+      .about-media { min-height: 320px; }
+      .grid-3, .why-grid, .review-grid { grid-template-columns: 1fr 1fr; }
+      .board-grid { grid-template-columns: 1fr 1fr; }
+      .foot-grid { grid-template-columns: 1fr 1fr; }
+      .section-head h2, .about-copy h2, .cta-copy h2 { font-size: 30px; line-height: 36px; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .dark-wrap { padding: 16px 0 64px; }
+      .nav { padding: 10px 14px; }
+      .nav .btn { padding: 8px 14px; font-size: 11px; }
+      .hero { margin-top: 48px; }
+      .hero h1 { font-size: 34px; line-height: 38px; letter-spacing: -.8px; }
+      .hero p.sub { font-size: 15px; }
+      .hero-media { height: 260px; }
+      .grid-3, .why-grid, .review-grid, .board-grid, .foot-grid { grid-template-columns: 1fr; }
+      .row-2 { grid-template-columns: 1fr; }
+      .madrasa-card { padding: 28px; }
+      .cta-copy h2 { font-size: 32px; line-height: 36px; }
+      .form-card { padding: 24px; }
+      .section-head h2, .about-copy h2 { font-size: 26px; line-height: 32px; }
+      .about-media .peach { display: none; }
+      .about-media .photo { left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HERO (dark navy with grid) ============ -->
+  <header class="dark-wrap">
+    <div class="container">
+      <nav class="nav" aria-label="Main">
+        <a href="#top" class="brand" id="top">
+          <div class="brand-mark">AYSH</div>
+          <div>
+            <div class="brand-name">AYSH</div>
+            <div class="brand-sub">Online Institute</div>
+          </div>
+        </a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#subjects">Subjects</a>
+          <a href="#why-us">Why Us</a>
+          <a href="#boards">Boards</a>
+          <a href="#reviews">Reviews</a>
+        </div>
+        <a href="#demo" class="btn btn-orange">Enroll Now
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </nav>
+
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="badge-pill"><span class="dot">+</span> Live small-group classes across India</span>
+          <h1>Learn Smarter.<span class="accent">Achieve More.</span></h1>
+          <p class="sub">AYSH Online Institute brings CBSE, ICSE, State Board and College Level tuition into your home — small batches, India’s best educators, and a foundation that lasts well beyond the exam.</p>
+          <div class="hero-ctas">
+            <a href="#demo" class="btn btn-orange">Enroll Today
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+            <a href="#subjects" class="btn btn-ghost">Explore Subjects</a>
+          </div>
+          <div class="proof">
+            <span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l2 4.2 4.6.6-3.4 3.2.9 4.6L8 11.8 3.9 14.1l.9-4.6L1.4 6.3 6 5.7z"/></svg>Rated 4.9/5 by our students</span>
+            <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="6" cy="5" r="2.5"/><circle cx="11" cy="6" r="2"/><path d="M1.5 14c.5-2.6 2.3-4 4.5-4s4 1.4 4.5 4M10 14c.2-1.6 1.2-2.6 2.6-2.6 1 0 1.8.5 2.2 1.4"/></svg>Batches of 6–8 only</span>
+            <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 3h4.5c1 0 1.5.5 1.5 1.5V14c0-.8-.6-1.3-1.5-1.3H2zM14 3H9.5C8.5 3 8 3.5 8 4.5V14c0-.8.6-1.3 1.5-1.3H14z"/></svg>Four boards covered</span>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <!-- To use your photo: replace the inner block with <img src="student-learning.jpg" alt="Student learning during a live online class" style="width:100%;height:100%;object-fit:cover"> -->
+          <div class="hero-photo" role="img" aria-label="Student learning during a live online class">
+            <div>
+              <div class="ph-title">No difference between<br/>offline &amp; online teaching</div>
+              <div class="ph-note">Student photo placeholder: add your image here</div>
+            </div>
+          </div>
+          <div class="float-badge">
+            <small>Live class now</small>
+            <strong>7 students · Maths</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-media">
+          <div class="peach"></div>
+          <div class="photo">Add a classroom or educator photo here</div>
+        </div>
+        <div class="about-copy">
+          <span class="eyebrow" style="align-self:flex-start">About the Institute</span>
+          <h2>Quality education, built around every student.</h2>
+          <p>Our Online Institute is committed to providing high-quality education to students from a variety of boards. Whether you’re studying CBSE, ICSE, or State Boards, College Level Syllabus is also covered.</p>
+          <p>Our skilled instructors conduct classes in Mathematics, Accounting, Physics, Biology, Chemistry, and other areas. What distinguishes us is our emphasis on small group lessons, which enable pupils to concentrate better.</p>
+          <p>In these engaging classes, you’ll learn from India’s greatest educators, assuring a solid foundation and high academic success. In addition, we provide specialized training for each subject. Join Online Tuitions and embark on a path of learning and development!</p>
+          <ul class="checks">
+            <li>Concept-first teaching instead of rote learning</li>
+            <li>Doubt sessions after every single class</li>
+            <li>Specialised training built for each subject</li>
+          </ul>
+          <div><a href="#subjects" class="btn btn-navy">Explore our subjects
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUBJECTS (6 cards) ============ -->
+  <section class="subjects" id="subjects">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Subjects we offer</span>
+        <h2>Every subject, taught by a specialist.</h2>
+        <p>Six focused streams, each with its own teaching method, practice material and revision plan — so nothing is taught generically.</p>
+      </div>
+
+      <div class="grid-3" style="margin-top:56px">
+        <article class="subject-card">
+          <div class="subject-top">
+            <div class="icon-box" style="background:#eff6ff;color:#2563eb">∑</div><span class="arrow">↗</span>
+          </div>
+          <div>
+            <h3>Mathematics</h3>
+            <p>Algebra, calculus, trigonometry and geometry taught step by step, with timed practice sets that build real exam confidence.</p>
+          </div>
+          <div class="tags"><span class="tag">Class 6–12</span><span class="tag">College Maths</span></div>
+        </article>
+        <article class="subject-card">
+          <div class="subject-top">
+            <div class="icon-box" style="background:#fffbeb;color:#d97706">₹</div><span class="arrow">↗</span>
+          </div>
+          <div>
+            <h3>Accounting</h3>
+            <p>Journal entries, ledgers, balance sheets and accountancy theory made simple and systematic — with weekly problem-solving drills.</p>
+          </div>
+          <div class="tags"><span class="tag">Class 11–12</span><span class="tag">B.Com / BBA</span></div>
+        </article>
+        <article class="subject-card">
+          <div class="subject-top">
+            <div class="icon-box" style="background:#faf5ff;color:#7c3aed">◇</div><span class="arrow">↗</span>
+          </div>
+          <div>
+            <h3>Physics</h3>
+            <p>Concepts, derivations and numericals from mechanics to modern physics, explained with diagrams you can actually remember.</p>
+          </div>
+          <div class="tags"><span class="tag">Class 9–12</span><span class="tag">NEET / JEE basics</span></div>
+        </article>
+        <article class="subject-card">
+          <div class="subject-top">
+            <div class="icon-box" style="background:#ecfdf5;color:#059669">⚗</div><span class="arrow">↗</span>
+          </div>
+          <div>
+            <h3>Biology</h3>
+            <p>Diagrams, processes and memory-friendly notes across Botany, Zoology and Human Biology for board and entrance exams.</p>
+          </div>
+          <div class="tags"><span class="tag">Class 9–12</span><span class="tag">NEET basics</span></div>
+        </article>
+        <article class="subject-card">
+          <div class="subject-top">
+            <div class="icon-box" style="background:#fff1f2;color:#e11d48">⚛</div><span class="arrow">↗</span>
+          </div>
+          <div>
+            <h3>Chemistry</h3>
+            <p>Organic, inorganic and physical chemistry with reaction maps, mechanism practice and lab logic that finally clicks.</p>
+          </div>
+          <div class="tags"><span class="tag">Class 9–12</span><span class="tag">NEET / JEE basics</span></div>
+        </article>
+        <article class="subject-card">
+          <div class="subject-top">
+            <div class="icon-box" style="background:#ecfeff;color:#0891b2">+</div><span class="arrow">↗</span>
+          </div>
+          <div>
+            <h3>&amp; More</h3>
+            <p>English, Economics, Business Studies, Computer Science and other subjects on request — tell us what you need.</p>
+          </div>
+          <div class="tags"><span class="tag">On request</span><span class="tag">All boards</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ONLINE MADRASA BAND ============ -->
+  <section class="madrasa" id="madrasa">
+    <div class="container">
+      <div class="madrasa-card">
+        <div class="madrasa-copy">
+          <span class="eyebrow" style="background:rgba(255,255,255,.1);color:#fdba74;align-self:flex-start">Special programme</span>
+          <h2>Online Madrasa for Women &amp; Kids</h2>
+          <p>Structured, flexible online classes for women and children, taught by qualified educators in a safe, small-group setting.</p>
+          <div class="madrasa-tags">
+            <span>Live classes</span><span>Flexible timings</span><span>Small groups</span><span>Qualified teachers</span>
+          </div>
+        </div>
+        <div class="madrasa-cta">
+          <a href="#demo" class="btn btn-orange">Enquire now</a>
+          <a href="#demo" class="btn btn-ghost">Book a free demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY US (6 reasons) ============ -->
+  <section class="why" id="why-us">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Why choose AYSH</span>
+        <h2>Six reasons families stay with AYSH</h2>
+        <p>Everything we do is designed around how students actually learn — and how parents want to see them succeed.</p>
+      </div>
+      <div class="why-grid">
+        <div class="reason">
+          <div class="icon-box">👥</div>
+          <h3>Small Group Lessons</h3>
+          <p>Batches are capped at 6–8 students, so every doubt gets heard and every learner gets the attention they need.</p>
+        </div>
+        <div class="reason">
+          <div class="icon-box">🎓</div>
+          <h3>India’s Best Educators</h3>
+          <p>Subject specialists with years of board-exam and competitive-exam teaching experience lead every class.</p>
+        </div>
+        <div class="reason">
+          <div class="icon-box">📚</div>
+          <h3>Multiple Boards Covered</h3>
+          <p>CBSE, ICSE, State Boards and College Level syllabus — all under one roof, with the right material for each.</p>
+        </div>
+        <div class="reason">
+          <div class="icon-box">🧱</div>
+          <h3>Strong Academic Foundation</h3>
+          <p>We build fundamentals first, so students understand the why behind every formula instead of memorising it.</p>
+        </div>
+        <div class="reason">
+          <div class="icon-box">🧪</div>
+          <h3>Specialized Training per Subject</h3>
+          <p>Each subject follows its own teaching method, practice sets and revision schedule — never a generic template.</p>
+        </div>
+        <div class="reason">
+          <div class="icon-box">🖊️</div>
+          <h3>Engaging &amp; Interactive Classes</h3>
+          <p>Live whiteboard work, open doubt-solving and regular assessments keep students genuinely involved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BOARDS WE COVER ============ -->
+  <section class="boards" id="boards">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Boards we cover</span>
+        <h2>One institute, every board</h2>
+        <p>Whichever curriculum your child follows, we have a dedicated stream and study material for it.</p>
+      </div>
+      <div class="board-grid">
+        <div class="board"><div class="seal">CB</div><h3>CBSE</h3><p>Classes 6–12</p></div>
+        <div class="board"><div class="seal">IC</div><h3>ICSE</h3><p>Classes 6–12</p></div>
+        <div class="board"><div class="seal">SB</div><h3>State Boards</h3><p>All major states</p></div>
+        <div class="board"><div class="seal">CL</div><h3>College Level</h3><p>Under-graduate syllabus</p></div>
+      </div>
+      <div class="filters" role="tablist" aria-label="Filter boards">
+        <button class="active" type="button">All</button>
+        <button type="button">CBSE</button>
+        <button type="button">ICSE</button>
+        <button type="button">State Boards</button>
+        <button type="button">College Level</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Student reviews</span>
+        <h2>Students and parents love learning here</h2>
+        <p>Real feedback from students across India.</p>
+      </div>
+      <div class="review-grid">
+        <div class="review">
+          <div class="quote-mark">“</div>
+          <div class="stars">★★★★★</div>
+          <blockquote>Maths used to be my weakest subject. In a batch of seven, my teacher could actually see where I was going wrong. I finished with 94 in my board exam.</blockquote>
+          <div class="reviewer"><div class="avatar">A</div><div><strong>Student, Class 10</strong><small>CBSE</small></div></div>
+        </div>
+        <div class="review">
+          <div class="quote-mark">“</div>
+          <div class="stars">★★★★★</div>
+          <blockquote>Accounting finally made sense. The step-by-step ledger practice and weekly tests turned a subject I dreaded into my highest score of the semester.</blockquote>
+          <div class="reviewer"><div class="avatar">R</div><div><strong>Student, Class 12</strong><small>ICSE</small></div></div>
+        </div>
+        <div class="review">
+          <div class="quote-mark">“</div>
+          <div class="stars">★★★★★</div>
+          <blockquote>Physics numericals felt impossible before AYSH. The doubt sessions after every class are what made the real difference for me.</blockquote>
+          <div class="reviewer"><div class="avatar">S</div><div><strong>Student, Class 11</strong><small>State Board</small></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DARK CTA + LEAD FORM ============ -->
+  <section class="cta" id="demo">
+    <div class="container">
+      <div class="cta-grid">
+        <div class="cta-copy">
+          <span class="eyebrow">Enroll today</span>
+          <h2>Your next academic year starts here.</h2>
+          <p>Tell us your class, board and subject. Our academic team will call you within 24 hours to schedule a free demo class with the right educator.</p>
+          <div>
+            <a href="https://wa.me/919551122728" class="btn btn-wa" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 0 0-5.6 9.8L1.5 14.5l3.3-.9A6.5 6.5 0 1 0 8 1.5zm0 1.3a5.2 5.2 0 1 1-2.7 9.7l-.2-.1-1.9.5.5-1.9-.1-.2A5.2 5.2 0 0 1 8 2.8z"/></svg>
+              WhatsApp: 9551122728
+            </a>
+          </div>
+          <ul class="feature-list">
+            <li><span class="fi">👥</span><div><strong>Batches of 6–8 students</strong><small>Small enough that your doubt never goes unheard.</small></div></li>
+            <li><span class="fi">💬</span><div><strong>Doubt sessions after every class</strong><small>Stay back and clear everything before the next topic.</small></div></li>
+            <li><span class="fi">✅</span><div><strong>Free demo class first</strong><small>Meet the educator and try a lesson before you enrol.</small></div></li>
+          </ul>
+        </div>
+
+        <div class="form-card">
+          <h3>Book a free demo class</h3>
+          <p class="form-sub">Takes less than a minute. No payment required.</p>
+
+          <form id="leadForm" novalidate>
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" placeholder="e.g. Ananya Sharma" autocomplete="name" required />
+            </div>
+            <div class="row-2">
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" placeholder="98765 43210" autocomplete="tel" required />
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+              </div>
+            </div>
+
+            <button type="submit" class="submit" id="submitBtn">
+              Request my free demo
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+            <p class="form-note">Your details are stored securely and used only to contact you about classes.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="container">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="brand">
+            <div class="brand-mark">AYSH</div>
+            <div>
+              <div class="brand-name">AYSH</div>
+              <div class="brand-sub">Online Institute</div>
+            </div>
+          </div>
+          <p>High quality online live tuition in small batches of 6–8 students for CBSE, ICSE, State Boards &amp; College.</p>
+        </div>
+        <div>
+          <h4>Quick links</h4>
+          <ul>
+            <li><a href="#about">About Institute</a></li>
+            <li><a href="#subjects">Subjects Offered</a></li>
+            <li><a href="#why-us">Why Choose AYSH</a></li>
+            <li><a href="#boards">Boards Covered</a></li>
+            <li><a href="#reviews">Student Testimonials</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Key subjects</h4>
+          <ul>
+            <li><a href="#subjects">Mathematics</a></li>
+            <li><a href="#subjects">Accounting &amp; Commerce</a></li>
+            <li><a href="#subjects">Physics</a></li>
+            <li><a href="#subjects">Biology &amp; Zoology</a></li>
+            <li><a href="#subjects">Chemistry</a></li>
+            <li><a href="#madrasa">Online Madrasa (Women &amp; Kids)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact details</h4>
+          <ul>
+            <li>WhatsApp Helpline: 9551122728</li>
+            <li>Classes: Live across India</li>
+            <li><a href="#demo">Book a free demo class</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 AYSH Online Institute. All rights reserved.</span>
+        <nav>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Apps Script web app URL (deployed from Code.gs)
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxOYykRDrZ-8Phgw843Pr4VJhq1NXpiJ-7UgREztOVoBiIQ73Zd-urG3bQqydLLhhciKw/exec";
+
+    const form = document.getElementById("leadForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusEl = document.getElementById("formStatus");
+
+    function showSuccess() {
+      statusEl.className = "form-status ok";
+      statusEl.textContent = "Thank you! We’ll call you within 24 hours to book your demo class.";
+      form.reset();
+      submitBtn.disabled = false;
+    }
+
+    function showError() {
+      statusEl.className = "form-status err";
+      statusEl.textContent = "Something went wrong. Please try again or message us on WhatsApp.";
+      submitBtn.disabled = false;
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+
+      if (!name || !email || !phone) {
+        statusEl.className = "form-status err";
+        statusEl.textContent = "Please fill in your name, email and phone number.";
+        return;
+      }
+
+      statusEl.className = "form-status";
+      statusEl.textContent = "Sending…";
+      submitBtn.disabled = true;
+
+      const url = SCRIPT_URL + "?" + new URLSearchParams({ name: name, email: email, phone: phone });
+
+      fetch(url, { method: "GET", mode: "no-cors" })
+        .then(() => showSuccess())
+        .catch(() => showError());
+    });
+  </script>
+</body>
+</html>
